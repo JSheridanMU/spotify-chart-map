@@ -1,0 +1,10 @@
+.leaflet-container {
+    background-color:#181717;
+}
+
+.map-container {
+    border-style: solid;
+    border-color: black;
+    border-width: 5px;
+    width: 50%;
+}
