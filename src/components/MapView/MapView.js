@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {MapContainer, GeoJSON, ImageOverlay} from 'react-leaflet'
 import mapData from '../../data/countries.json'
-import codes from '../../data/codes.json'
 import 'leaflet/dist/leaflet.css'
 import './MapView.css'
 import Container from 'react-bootstrap/Container'
@@ -16,16 +15,10 @@ const bounds = mapData.features[16].geometry.coordinates
 class MapView extends Component {
     state = {}
 
-    getCountryCode(threeDigit){
-        let countryCodes = Object.assign({}, ...Object.entries(codes).map(([a,b]) => ({ [b]: a })))
-        return(countryCodes[threeDigit].toLowerCase())
-    }
-
     onEachCountry = (country, layer) => {
-        const countryName = country.properties.ADMIN
         layer.on({
             click: (e) => {
-                console.log(countryName ,this.getCountryCode(e.target.feature.properties.ISO_A3))
+                this.props.handleInputChange(e.target.feature.properties)
             }
         })
     }

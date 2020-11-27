@@ -1,8 +1,16 @@
 import React from "react";
 import { Col, Container, Row, Form, Table } from "react-bootstrap";
 import MapView from "../MapView/MapView";
+import GetCountry from "../GetCountry/GetCountry";
+
+const initialCountry = {
+  name: "Ireland",
+  code: "ie",
+};
 
 export default function Dashboard() {
+  const { country, handleInputChange } = GetCountry(initialCountry);
+
   return (
     <React.Fragment>
       <Container>
@@ -47,10 +55,10 @@ export default function Dashboard() {
             </Table>
           </Col>
           <Col xs={6}>
-            <MapView />
+            <MapView handleInputChange={handleInputChange}/>
           </Col>
           <Col xs={3}>
-            <h3>Temp Country</h3>
+            <h3>Temp {country.name}</h3>
             <Table striped bordered hover variant="dark">
               <thead>
                 <tr>
