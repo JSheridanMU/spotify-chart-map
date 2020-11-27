@@ -1,15 +1,15 @@
-import React from 'react';
-import './App.css';
-import Header from './components/Header/Header';
-import MapView from './components/MapView/MapView';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React from "react";
+import "./App.css";
+import Header from "./components/Header/Header";
+import Dashboard from "./components/Dashboard/Dashboard";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-  document.body.style = 'background: #181717;';
+  document.body.style = "background: #181717;";
   return (
     <div className="App">
-      <Header/>
-      <MapView/>
+      <Header />
+      <Dashboard/>
     </div>
   );
 }
