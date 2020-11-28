@@ -19,11 +19,22 @@ class MapView extends Component {
     });
   };
 
+  countryStyle = {
+    fillColor: "#1DB954",
+    fillOpacity: "0.5",
+    color: "#1DB954",
+    weight: "1",
+  };
+
   render() {
     return (
       <Container className="map-container">
         <MapContainer style={mapStyle} center={[55, 20]} zoom={4}>
-          <GeoJSON data={mapData.features} onEachFeature={this.onEachCountry} />
+          <GeoJSON
+            style={this.countryStyle}
+            data={mapData.features}
+            onEachFeature={this.onEachCountry}
+          />
         </MapContainer>
       </Container>
     );
