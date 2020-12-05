@@ -1,0 +1,29 @@
+.RangeSlider-green {
+    color: #1DB954;
+}
+
+.GlobalChartTable {
+    z-index: 1000;
+    border-style: solid;
+    background: lightgray;
+}
+
+.CountryChartTable {
+    z-index: 1000;
+    border-style: solid;
+    background: lightgray;
+}
+
+thead, tbody, tr, th, td {
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+}
+
+thead > tr {
+    background: darkgreen;
+}
+
+tbody > tr:hover {
+    background: #1DB954;
+}
