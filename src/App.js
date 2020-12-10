@@ -8,7 +8,6 @@ function App() {
   document.body.style = "background: #181717;";
   return (
     <div className="App">
-      <Header />
       <Dashboard/>
     </div>
   );
