@@ -1,15 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Container, Row, Form, Table } from "react-bootstrap";
 import MapView from "../MapView/MapView";
 import GetCountry from "../GetCountry/GetCountry";
+import Player from "../Player/Player";
+import hash from "./hash";
 
 const initialCountry = {
   name: "Ireland",
   code: "ie",
 };
 
+const authEndpoint = 'https://accounts.spotify.com/authorize';
+const clientId = "b7160102d9c74bf78c0ae7590b3bd441";
+const redirectUri = "http://localhost:3000";
+const scopes = [
+  "streaming",
+  "user-read-email",
+  "user-read-private",
+  "user-read-playback-state",
+  "user-library-read",
+  "user-library-modify",
+  "user-read-currently-playing",
+  "user-modify-playback-state",
+];
+
 export default function Dashboard() {
   const { country, handleInputChange } = GetCountry(initialCountry);
+
+  let _token = hash.access_token;
 
   return (
     <React.Fragment>
@@ -86,6 +104,23 @@ export default function Dashboard() {
               </tbody>
             </Table>
           </Col>
+        </Row>
+        <Row>
+          {!_token && (
+            <a
+              className="btn btn--loginApp-link"
+              href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
+                "%20"
+              )}&response_type=token&show_dialog=true`}
+            >
+              Login to Spotify
+            </a>
+          )}
+          {_token && (
+              <Player
+                token={_token}
+              />
+            )}
         </Row>
       </Container>
     </React.Fragment>
