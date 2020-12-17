@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Container, Row, Form, Table } from "react-bootstrap";
 import MapView from "../MapView/MapView";
+import Header from "../Header/Header";
 import GetCountry from "../GetCountry/GetCountry";
+import Player from "../Player/Player";
 
 const initialCountry = {
   name: "Ireland",
@@ -10,9 +12,15 @@ const initialCountry = {
 
 export default function Dashboard() {
   const { country, handleInputChange } = GetCountry(initialCountry);
+  const [_token, setToken] = useState(null);
 
+  const handleTokenChange = (e) => {
+    setToken(e)
+  }
+  
   return (
     <React.Fragment>
+      <Header tokenChange={handleTokenChange}/>
       <Container>
         <Row className="justify-content-md-center">
           <Col xs={6}>
@@ -86,6 +94,13 @@ export default function Dashboard() {
               </tbody>
             </Table>
           </Col>
+        </Row>
+        <Row>
+          {_token && (
+              <Player
+                token={_token}
+              />
+            )}
         </Row>
       </Container>
     </React.Fragment>
