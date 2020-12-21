@@ -3,8 +3,5 @@
 }
 
 .map-container {
-    border-style: solid;
-    border-color: black;
-    border-width: 5px;
-    width: 50%;
+    width: 38vw !important;
 }
