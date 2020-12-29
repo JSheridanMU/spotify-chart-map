@@ -7,6 +7,8 @@ import GetCountry from "../GetCountry/GetCountry";
 //import ChartsData from "../ChartsData/ChartsData"
 import "./Dashboard.css";
 import moment from "moment";
+import Header from "../Header/Header";
+import Player from "../Player/Player";
 
 const initialCountry = {
   name: "Ireland",
@@ -29,8 +31,15 @@ export default function Dashboard() {
   const [tempDate, setTempDate] = useState(maxDate);
   const [finalDate, setFinalDate] = useState(tempDate);
 
+  const [_token, setToken] = useState(null);
+
+  const handleTokenChange = (e) => {
+    setToken(e)
+  }
+  
   return (
     <React.Fragment>
+      <Header tokenChange={handleTokenChange}/>
       <Container>
         <Row className="justify-content-md-center">
           <Col xs={6}>
@@ -66,6 +75,13 @@ export default function Dashboard() {
             </h3>
             <Table className="CountryChartTable"></Table>
           </Col>
+        </Row>
+        <Row>
+          {_token && (
+              <Player
+                token={_token}
+              />
+            )}
         </Row>
       </Container>
     </React.Fragment>
