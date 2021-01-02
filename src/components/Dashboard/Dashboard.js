@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import { Col, Container, Row, Form, Table } from "react-bootstrap";
+import { Col, Container, Row, Table } from "react-bootstrap";
+import RangeSlider from "react-bootstrap-range-slider";
 import MapView from "../MapView/MapView";
-import Header from "../Header/Header";
 import GetCountry from "../GetCountry/GetCountry";
+//import GetCharts from "../GetCharts/GetCharts"
+import ChartsData from "../ChartsData/ChartsData"
+import "./Dashboard.css";
+import moment from "moment";
+import Header from "../Header/Header";
 import Player from "../Player/Player";
 
 const initialCountry = {
@@ -11,86 +16,85 @@ const initialCountry = {
 };
 
 export default function Dashboard() {
+  let dateArray = [];
+  let minDate = "01/01/2016";
+  let maxDate = moment().subtract(1, "days").format("DD/MM/YYYY"); //may need to change to subtract 2 days depending on when spotify updates
+
+  while (
+    moment(minDate, "DD/MM/YYYY").valueOf() <= moment(maxDate, "DD/MM/YYYY").valueOf()
+  ) {
+    dateArray.push(moment(minDate, "DD/MM/YYYY").format("DD/MM/YYYY"));
+    minDate = moment(minDate, "DD/MM/YYYY").add(1, "days").format("DD/MM/YYYY");
+  }
+
   const { country, handleInputChange } = GetCountry(initialCountry);
+  const [tempDate, setTempDate] = useState(maxDate);
+  const [finalDate, setFinalDate] = useState(tempDate);
+
   const [_token, setToken] = useState(null);
 
   const handleTokenChange = (e) => {
     setToken(e)
   }
-  
+  //<Container></Container>
   return (
     <React.Fragment>
       <Header tokenChange={handleTokenChange}/>
-      <Container>
+      <Container fluid={true}>
         <Row className="justify-content-md-center">
           <Col xs={6}>
-            <Form>
-              <Form.Group controlId="formBasicRange">
-                <Form.Label>Temp Slider</Form.Label>
-                <Form.Control type="range" />
-              </Form.Group>
-            </Form>
+            <RangeSlider
+              value={tempDate}
+              variant={"success"}
+              onChange={(changeEvent) => setTempDate(changeEvent.target.value)}
+              onAfterChange={(changeEvent) =>
+                setFinalDate(changeEvent.target.value)
+              }
+              
+              min={0}
+              max={dateArray.length - 1}
+              tooltip={"auto"}
+              tooltipLabel={(currentValue) => dateArray[tempDate]}
+            />
           </Col>
         </Row>
-        <Row>
+        <Row noGutters={true}>
           <Col xs={3}>
-            <h3>Temp Global</h3>
-            <Table striped bordered hover variant="dark">
+            <h3 style={{ color: "#1DB954" }}>
+              Global Charts{" "}
+              {dateArray[finalDate] ? dateArray[finalDate] : maxDate}
+            </h3>
+            <Table className="GlobalChartTable" striped bordered hover variant="dark">
               <thead>
                 <tr>
-                  <th>#</th>
+                  <th>Rank</th>
                   <th>Song</th>
                   <th>Streams</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Song1</td>
-                  <td>54645</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Song2</td>
-                  <td>54645</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Song3</td>
-                  <td>54645</td>
-                </tr>
+                {ChartsData(dateArray[finalDate] ? dateArray[finalDate] : maxDate, country.name, "gData")}
               </tbody>
             </Table>
           </Col>
           <Col xs={6}>
-            <MapView handleInputChange={handleInputChange}/>
+            <MapView handleInputChange={handleInputChange} />
           </Col>
           <Col xs={3}>
-            <h3>Temp {country.name}</h3>
-            <Table striped bordered hover variant="dark">
+            <h3 style={{ color: "#1DB954" }}>
+              {country.name} Charts{" "}
+              {dateArray[finalDate] ? dateArray[finalDate] : maxDate}
+            </h3>
+            <Table className="CountryChartTable" striped bordered hover variant="dark">
               <thead>
                 <tr>
-                  <th>#</th>
+                  <th>Rank</th>
                   <th>Song</th>
                   <th>Streams</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Song1</td>
-                  <td>54645</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Song2</td>
-                  <td>54645</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Song3</td>
-                  <td>54645</td>
-                </tr>
+                {ChartsData(dateArray[finalDate] ? dateArray[finalDate] : maxDate, country.name, "cData")}
               </tbody>
             </Table>
           </Col>

@@ -1,0 +1,37 @@
+.VolumeSlider {
+    z-index: 1000;
+    position: absolute;
+    width: 150px;
+    right: 20px;
+    top: 10px;
+}
+
+.GlobalChartTable {
+    z-index: 1000;
+    border-style: solid;
+    background: lightgray;
+}
+
+.CountryChartTable {
+    z-index: 1000;
+    border-style: solid;
+    background: lightgray;
+}
+
+.Container {
+    width: 95%;
+}
+
+thead, tbody, tr, th, td {
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+}
+
+/*thead > tr {
+    background: darkgreen;
+}*/
+
+tbody > tr:hover {
+    background: #1DB954;
+}
