@@ -3,7 +3,6 @@ import { Col, Container, Row, Table } from "react-bootstrap";
 import RangeSlider from "react-bootstrap-range-slider";
 import MapView from "../MapView/MapView";
 import GetCountry from "../GetCountry/GetCountry";
-//import GetCharts from "../GetCharts/GetCharts"
 import ChartsData from "../ChartsData/ChartsData"
 import "./Dashboard.css";
 import moment from "moment";
@@ -64,18 +63,20 @@ export default function Dashboard() {
               Global Charts{" "}
               {dateArray[finalDate] ? dateArray[finalDate] : maxDate}
             </h3>
-            <Table className="GlobalChartTable" striped bordered hover variant="dark">
-              <thead>
-                <tr>
-                  <th>Rank</th>
-                  <th>Song</th>
-                  <th>Streams</th>
-                </tr>
-              </thead>
-              <tbody>
-                {ChartsData(dateArray[finalDate] ? dateArray[finalDate] : maxDate, country.name, "gData")}
-              </tbody>
-            </Table>
+            <div className = "GlobalChartTable">
+              <Table striped bordered hover variant="dark">
+                <thead>
+                  <tr>
+                    <th>Rank</th>
+                    <th>Song</th>
+                    <th>Streams</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {ChartsData(dateArray[finalDate] ? dateArray[finalDate] : maxDate, country.name, "gData")}
+                </tbody>
+              </Table>
+            </div>
           </Col>
           <Col xs={6}>
             <MapView handleInputChange={handleInputChange} />
@@ -85,18 +86,20 @@ export default function Dashboard() {
               {country.name} Charts{" "}
               {dateArray[finalDate] ? dateArray[finalDate] : maxDate}
             </h3>
-            <Table className="CountryChartTable" striped bordered hover variant="dark">
-              <thead>
-                <tr>
-                  <th>Rank</th>
-                  <th>Song</th>
-                  <th>Streams</th>
-                </tr>
-              </thead>
-              <tbody>
-                {ChartsData(dateArray[finalDate] ? dateArray[finalDate] : maxDate, country.name, "cData")}
-              </tbody>
-            </Table>
+            <div class = "CountryChartTable">
+              <Table striped bordered hover variant="dark">
+                <thead>
+                  <tr>
+                    <th>Rank</th>
+                    <th>Song</th>
+                    <th>Streams</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {ChartsData(dateArray[finalDate] ? dateArray[finalDate] : maxDate, country.name, "cData")}
+                </tbody>
+              </Table>
+            </div>
           </Col>
         </Row>
         <Row>

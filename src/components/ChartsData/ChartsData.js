@@ -116,18 +116,7 @@ function getData(date, country, tableType){
 export default function ChartsData(date, country, tableType) {
   const chartData = getData(date, country, tableType)
 
-  if (tableType = "gData") {
-    return chartData.data.map((tData) => {
-      return (
-        <tr key = {tData["Position"]}>
-          <td>{tData["Position"]}</td>
-          <td>{tData["Track Name"]}</td>
-          <td>{tData["Streams"]}</td>
-        </tr>
-      )
-    })
-  }
-  if (tableType = "cData") {
+  if (tableType = ("gData" || "cData")) {
     return chartData.data.map((tData) => {
       return (
         <tr key = {tData["Position"]}>

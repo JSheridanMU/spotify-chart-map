@@ -6,32 +6,27 @@
     top: 10px;
 }
 
-.GlobalChartTable {
-    z-index: 1000;
-    border-style: solid;
-    background: lightgray;
+table tbody, table thead {
+    display: block;
 }
 
-.CountryChartTable {
-    z-index: 1000;
-    border-style: solid;
-    background: lightgray;
+table tbody {
+    max-height: 500px;
+    overflow-y: scroll;
 }
 
-.Container {
-    width: 95%;
-}
-
-thead, tbody, tr, th, td {
-    border-style: solid;
-    border-width: 1px;
-    border-color: black;
-}
-
-/*thead > tr {
+thead > tr > th {
     background: darkgreen;
-}*/
+}
 
-tbody > tr:hover {
-    background: #1DB954;
+th:nth-child(1), td:nth-child(1) {
+    width: 75px;
+}
+
+th:nth-child(2), td:nth-child(2) {
+    width: 200px;
+}
+
+th:nth-child(3) {
+    width: 100px;
 }
