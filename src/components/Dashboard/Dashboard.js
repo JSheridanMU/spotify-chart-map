@@ -35,7 +35,7 @@ export default function Dashboard() {
   const handleTokenChange = (e) => {
     setToken(e)
   }
-  //<Container></Container>
+
   return (
     <React.Fragment>
       <Header tokenChange={handleTokenChange}/>
@@ -49,7 +49,6 @@ export default function Dashboard() {
               onAfterChange={(changeEvent) =>
                 setFinalDate(changeEvent.target.value)
               }
-              
               min={0}
               max={dateArray.length - 1}
               tooltip={"auto"}
@@ -73,7 +72,7 @@ export default function Dashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {ChartsData(dateArray[finalDate] ? dateArray[finalDate] : maxDate, country.name, "gData")}
+                  {ChartsData("gData")}
                 </tbody>
               </Table>
             </div>
@@ -96,7 +95,7 @@ export default function Dashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {ChartsData(dateArray[finalDate] ? dateArray[finalDate] : maxDate, country.name, "cData")}
+                  {ChartsData("cData")}
                 </tbody>
               </Table>
             </div>
