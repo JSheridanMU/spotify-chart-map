@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Col, Container, Row, Table } from "react-bootstrap";
 import RangeSlider from "react-bootstrap-range-slider";
 import MapView from "../MapView/MapView";
@@ -8,6 +8,7 @@ import "./Dashboard.css";
 import moment from "moment";
 import Header from "../Header/Header";
 import Player from "../Player/Player";
+import { db } from "../../utils/Firebase";
 
 const initialCountry = {
   name: "Ireland",
@@ -17,10 +18,12 @@ const initialCountry = {
 export default function Dashboard() {
   let dateArray = [];
   let minDate = "01/01/2016";
-  let maxDate = moment().subtract(1, "days").format("DD/MM/YYYY"); //may need to change to subtract 2 days depending on when spotify updates
+  //let maxDate = moment().subtract(1, "days").format("DD/MM/YYYY");
+  let maxDate = "29/11/2020";
 
   while (
-    moment(minDate, "DD/MM/YYYY").valueOf() <= moment(maxDate, "DD/MM/YYYY").valueOf()
+    moment(minDate, "DD/MM/YYYY").valueOf() <=
+    moment(maxDate, "DD/MM/YYYY").valueOf()
   ) {
     dateArray.push(moment(minDate, "DD/MM/YYYY").format("DD/MM/YYYY"));
     minDate = moment(minDate, "DD/MM/YYYY").add(1, "days").format("DD/MM/YYYY");
@@ -29,7 +32,6 @@ export default function Dashboard() {
   const { country, handleInputChange } = GetCountry(initialCountry);
   const [tempDate, setTempDate] = useState(maxDate);
   const [finalDate, setFinalDate] = useState(tempDate);
-
   const [_token, setToken] = useState(null);
 
   const handleTokenChange = (e) => {
@@ -101,13 +103,7 @@ export default function Dashboard() {
             </div>
           </Col>
         </Row>
-        <Row>
-          {_token && (
-              <Player
-                token={_token}
-              />
-            )}
-        </Row>
+        <Row>{_token && <Player token={_token} />}</Row>
       </Container>
     </React.Fragment>
   );
