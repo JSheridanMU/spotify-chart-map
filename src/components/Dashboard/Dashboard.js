@@ -15,11 +15,23 @@ const initialCountry = {
   code: "ie",
 };
 
+const makeArray = (snapshot) => {
+  const output = []
+
+  snapshot.forEach((child) => {
+    let item = child.val()
+    item.key = child.key
+    output.push(item)
+  })
+  
+  return output
+}
+
 export default function Dashboard() {
   let dateArray = [];
-  let minDate = "01/01/2016";
+  let minDate = "01/01/2017";
   //let maxDate = moment().subtract(1, "days").format("DD/MM/YYYY");
-  let maxDate = "29/11/2020";
+  let maxDate = "11/12/2020";
 
   while (
     moment(minDate, "DD/MM/YYYY").valueOf() <=
@@ -32,11 +44,40 @@ export default function Dashboard() {
   const { country, handleInputChange } = GetCountry(initialCountry);
   const [tempDate, setTempDate] = useState(maxDate);
   const [finalDate, setFinalDate] = useState(tempDate);
+  const [global, setGlobal] = useState(null);
+  const [regional, setRegional] = useState(null);
   const [_token, setToken] = useState(null);
 
   const handleTokenChange = (e) => {
     setToken(e)
   }
+
+  useEffect(() => {
+    const ref = db.ref();
+    const date = dateArray[finalDate] ? dateArray[finalDate] : maxDate;
+    const altDate = moment(date, "DD/MM/YYYY").format("YYYY-MM-DD");
+    const region = country ? country : initialCountry;
+    
+    ref.orderByChild("date").equalTo(date).on("value", (snapshot) => {
+        let data = makeArray(snapshot)
+        let countryTemp = []
+        let globalTemp = []
+        
+        ref.orderByChild("date").equalTo(altDate).on("value", (snapshot) => {
+            data = data.concat(makeArray(snapshot))
+            
+            data.forEach(entry => {
+              if(entry.region === region.code)
+                countryTemp.push(entry)
+              if(entry.region === "global")
+                globalTemp.push(entry)
+            })
+            setGlobal(globalTemp)
+            setRegional(countryTemp)
+          });
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [country, finalDate]);
 
   return (
     <React.Fragment>
@@ -74,7 +115,7 @@ export default function Dashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {ChartsData("gData")}
+                  {ChartsData(global)}
                 </tbody>
               </Table>
             </div>
@@ -91,13 +132,13 @@ export default function Dashboard() {
               <Table striped bordered hover variant="dark">
                 <thead>
                   <tr>
-                    <th>Rank</th>
-                    <th>Song</th>
+                    <th>Position</th>
+                    <th>Track</th>
                     <th>Streams</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {ChartsData("cData")}
+                  {ChartsData(regional)}
                 </tbody>
               </Table>
             </div>
