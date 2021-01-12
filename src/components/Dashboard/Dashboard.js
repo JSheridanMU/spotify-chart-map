@@ -3,6 +3,7 @@ import { Col, Container, Row, Table } from "react-bootstrap";
 import RangeSlider from "react-bootstrap-range-slider";
 import MapView from "../MapView/MapView";
 import GetCountry from "../GetCountry/GetCountry";
+import GetTrack from "../GetTrack/GetTrack";
 import ChartsData from "../ChartsData/ChartsData"
 import "./Dashboard.css";
 import moment from "moment";
@@ -42,6 +43,7 @@ export default function Dashboard() {
   }
 
   const { country, handleInputChange } = GetCountry(initialCountry);
+  const { track, handleTrackChange } = GetTrack();
   const [tempDate, setTempDate] = useState(maxDate);
   const [finalDate, setFinalDate] = useState(tempDate);
   const [global, setGlobal] = useState(null);
@@ -57,7 +59,7 @@ export default function Dashboard() {
     const date = dateArray[finalDate] ? dateArray[finalDate] : maxDate;
     const altDate = moment(date, "DD/MM/YYYY").format("YYYY-MM-DD");
     const region = country ? country : initialCountry;
-    
+
     ref.orderByChild("date").equalTo(date).on("value", (snapshot) => {
         let data = makeArray(snapshot)
         let countryTemp = []
@@ -65,7 +67,7 @@ export default function Dashboard() {
         
         ref.orderByChild("date").equalTo(altDate).on("value", (snapshot) => {
             data = data.concat(makeArray(snapshot))
-            
+            console.log(data)
             data.forEach(entry => {
               if(entry.region === region.code)
                 countryTemp.push(entry)
@@ -101,12 +103,12 @@ export default function Dashboard() {
         </Row>
         <Row noGutters={true}>
           <Col xs={3}>
-            <h3 style={{ color: "#1DB954" }}>
+            <h4 style={{ color: "#fff" }}>
               Global Charts{" "}
               {dateArray[finalDate] ? dateArray[finalDate] : maxDate}
-            </h3>
+            </h4>
             <div className = "GlobalChartTable">
-              <Table striped bordered hover variant="dark">
+              <Table hover>
                 <thead>
                   <tr>
                     <th>Rank</th>
@@ -115,7 +117,7 @@ export default function Dashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {ChartsData(global)}
+                  {ChartsData(global, handleTrackChange, _token)}
                 </tbody>
               </Table>
             </div>
@@ -124,12 +126,12 @@ export default function Dashboard() {
             <MapView handleInputChange={handleInputChange} />
           </Col>
           <Col xs={3}>
-            <h3 style={{ color: "#1DB954" }}>
+            <h4 style={{ color: "#fff" }}>
               {country.name} Charts{" "}
               {dateArray[finalDate] ? dateArray[finalDate] : maxDate}
-            </h3>
+            </h4>
             <div class = "CountryChartTable">
-              <Table striped bordered hover variant="dark">
+              <Table hover>
                 <thead>
                   <tr>
                     <th>Position</th>
@@ -138,13 +140,13 @@ export default function Dashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {ChartsData(regional)}
+                  {ChartsData(regional, handleTrackChange, _token)}
                 </tbody>
               </Table>
             </div>
           </Col>
         </Row>
-        <Row>{_token && <Player token={_token} />}</Row>
+        <Row>{_token && track && <Player token={_token} track={track} />}</Row>
       </Container>
     </React.Fragment>
   );

@@ -1,0 +1,8 @@
+.play-button .play-button--on,
+.play-button:hover .play-button--off {
+  display: none;
+}
+
+.play-button:hover .play-button--on {
+  display: inline;
+}

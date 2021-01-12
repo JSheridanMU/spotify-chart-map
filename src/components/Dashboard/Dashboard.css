@@ -10,13 +10,34 @@ table tbody, table thead {
     display: block;
 }
 
+.table td {
+    border-color: #201f1f !important;
+}
+
+.table th {
+    border-color: #201f1f !important;
+}
+
+.table td {
+    height: 75px;
+    vertical-align: middle !important;
+}
+
+.table-hover tbody tr:hover td {
+    background:#201f1f;
+    color: white;
+}
+
 table tbody {
-    max-height: 500px;
+    max-height: 480px;
     overflow-y: scroll;
+    color: white;
+    background: #181717;
 }
 
 thead > tr > th {
-    background: darkgreen;
+    background: #181717;
+    color: white;
 }
 
 th:nth-child(1), td:nth-child(1) {
