@@ -6,28 +6,48 @@
     top: 10px;
 }
 
-.GlobalChartTable {
-    z-index: 1000;
-    border-style: solid;
-    background: lightgray;
+table tbody, table thead {
+    display: block;
 }
 
-.CountryChartTable {
-    z-index: 1000;
-    border-style: solid;
-    background: lightgray;
+.table td {
+    border-color: #201f1f !important;
 }
 
-thead, tbody, tr, th, td {
-    border-style: solid;
-    border-width: 1px;
-    border-color: black;
+.table th {
+    border-color: #201f1f !important;
 }
 
-thead > tr {
-    background: darkgreen;
+.table td {
+    height: 75px;
+    vertical-align: middle !important;
 }
 
-tbody > tr:hover {
-    background: #1DB954;
+.table-hover tbody tr:hover td {
+    background:#201f1f;
+    color: white;
+}
+
+table tbody {
+    max-height: 480px;
+    overflow-y: scroll;
+    color: white;
+    background: #181717;
+}
+
+thead > tr > th {
+    background: #181717;
+    color: white;
+}
+
+th:nth-child(1), td:nth-child(1) {
+    width: 75px;
+}
+
+th:nth-child(2), td:nth-child(2) {
+    width: 200px;
+}
+
+th:nth-child(3) {
+    width: 100px;
 }

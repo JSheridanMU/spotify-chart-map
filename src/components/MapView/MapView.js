@@ -23,8 +23,8 @@ class MapView extends Component {
     fillColor: "#1DB954",
     fillOpacity: "0.5",
     color: "#1DB954",
-    weight: "1",
-  };
+    weight: "0.5",
+  }
 
   render() {
     return (

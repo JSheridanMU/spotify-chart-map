@@ -1,30 +1,56 @@
-import React, { useState, useEffect } from "react";
-import { Col, Container, Row, Form, Table } from "react-bootstrap";
-import RangeSlider from 'react-bootstrap-range-slider';
-import MapView from "../MapView/MapView";
-import GetCountry from "../GetCountry/GetCountry";
-import GetCharts from "../GetCharts/GetCharts"
-import './Dashboard.css';
+import React from "react";
+import "./ChartsData.css";
+import IconButton from "@material-ui/core/IconButton";
+import PlayArrowIcon from "@material-ui/icons/PlayArrow";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { grey } from "@material-ui/core/colors";
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: grey[50],
+    },
+  },
+});
 
-export default function ChartsData(props) {
-  con
-
-  const getThisYear = () => {
-    return new Date().getFullYear();
+export default function ChartsData(chart, handleTrackChange, _token) {
+  if (chart) {
+    return chart.map((entry) => {
+      return (
+        <tr key={entry.position}>
+          <td>
+            {_token ? (
+              <div class="play-button">
+                <div class="play-button--off">{chart.indexOf(entry) + 1}</div>
+                <div class="play-button--on">
+                  <ThemeProvider theme={theme}>
+                    <IconButton
+                      color="primary"
+                      onClick={() => {
+                        handleTrackChange(entry.spotify_id);
+                      }}
+                    >
+                      <PlayArrowIcon />
+                    </IconButton>
+                  </ThemeProvider>
+                </div>
+              </div>
+            ) : (
+              chart.indexOf(entry) + 1
+            )}
+          </td>
+          <td>{entry["track name"] + " by " + entry.artist}</td>
+          <td>{entry.streams}</td>
+        </tr>
+      );
+    });
+  } else {
+    return (
+      <tr>
+        <td>!!!</td>
+        <td>Loading</td>
+        <td>!!!</td>
+      </tr>
+    );
   }
-
-  const { country, handleInputChange } = GetCountry(initialCountry);
-
-  const [date, setDate] = useState(2020);
-
-  const { chart, handleDataChange } = GetCharts(initialChart, value, country.name);
-  useEffect(() => handleDataChange, [country, value]);
-
-
-  return (
-    <React.Fragment>
-      
-    </React.Fragment>
-  );
 }
