@@ -39,7 +39,7 @@ export default function Dashboard() {
   const initialCountry = { name: "Ireland", code: "ie"};
   const { country, handleInputChange } = GetCountry(initialCountry);
   const { track, handleTrackChange } = GetTrack();
-  const [tempDate, setTempDate] = useState(maxDate);
+  const [tempDate, setTempDate] = useState(null);
   const [finalDate, setFinalDate] = useState(tempDate);
   const [global, setGlobal] = useState(null);
   const [regional, setRegional] = useState(null);
@@ -82,18 +82,20 @@ export default function Dashboard() {
       <Container fluid={true}>
         <Row className="justify-content-md-center">
           <Col xs={6}>
-            <RangeSlider
-              value={tempDate}
-              variant={"success"}
-              onChange={(changeEvent) => setTempDate(changeEvent.target.value)}
-              onAfterChange={(changeEvent) =>
-                setFinalDate(changeEvent.target.value)
-              }
-              min={0}
-              max={dateArray.length - 1}
-              tooltip={"auto"}
-              tooltipLabel={(currentValue) => dateArray[tempDate]}
-            />
+            <div data-testid='slider'>
+              <RangeSlider
+                value={tempDate ? tempDate : dateArray.length - 1}
+                variant={"success"}
+                onChange={(changeEvent) => setTempDate(changeEvent.target.value)}
+                onAfterChange={(changeEvent) =>
+                  setFinalDate(changeEvent.target.value)
+                }
+                min={0}
+                max={dateArray.length - 1}
+                tooltip={"auto"}
+                tooltipLabel={() => tempDate ? dateArray[tempDate] : dateArray[dateArray.length-1]}
+              />
+            </div>
           </Col>
         </Row>
         <Row noGutters={true}>

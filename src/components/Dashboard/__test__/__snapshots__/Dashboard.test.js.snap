@@ -1,0 +1,200 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+Array [
+  <nav
+    className="color-nav navbar navbar-expand navbar-dark"
+  >
+    <a
+      className="navbar-brand"
+      href="#home"
+    >
+      <img
+        alt=""
+        className="d-inline-block align-top"
+        height="30"
+        src="/logo.png"
+        width="30"
+      />
+       
+      Spotify Chart Map
+    </a>
+    <a
+      className="btn btn--loginApp-link ml-auto"
+      href="https://accounts.spotify.com/authorize?client_id=d6aa49c0c90c42a49e4aa1e2b04dfb63&redirect_uri=http://localhost:3000&scope=streaming%20user-read-email%20user-read-private%20user-read-playback-state%20user-library-read%20user-library-modify%20user-read-currently-playing%20user-modify-playback-state&response_type=token&show_dialog=true"
+    >
+      Login to Spotify
+    </a>
+  </nav>,
+  <div
+    className="container-fluid"
+  >
+    <div
+      className="justify-content-md-center row"
+    >
+      <div
+        className="col-6"
+      >
+        <div
+          data-testid="slider"
+        >
+          <span
+            className="range-slider__wrap"
+          >
+            <input
+              className="range-slider range-slider--success"
+              disabled={false}
+              max={1440}
+              min={0}
+              onChange={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              type="range"
+              value={1440}
+            />
+            <div
+              className="range-slider__tooltip range-slider__tooltip--auto range-slider__tooltip--bottom"
+              style={
+                Object {
+                  "left": "calc(100% + -10px)",
+                }
+              }
+            >
+              <div
+                className="range-slider__tooltip__label"
+              >
+                11/12/2020
+              </div>
+              <div
+                className="range-slider__tooltip__arrow"
+              />
+            </div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      className="row no-gutters"
+    >
+      <div
+        className="col-3"
+      >
+        <h4
+          style={
+            Object {
+              "color": "#fff",
+            }
+          }
+        >
+          Global Charts
+           
+          11/12/2020
+        </h4>
+        <div
+          className="GlobalChartTable"
+        >
+          <table
+            className="table table-hover"
+          >
+            <thead>
+              <tr>
+                <th>
+                  Rank
+                </th>
+                <th>
+                  Song
+                </th>
+                <th>
+                  Streams
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  !!!
+                </td>
+                <td>
+                  Loading
+                </td>
+                <td>
+                  !!!
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div
+        className="col-6"
+      >
+        <div
+          className="map-container container"
+        >
+          <div
+            style={
+              Object {
+                "height": "70vh",
+                "width": "35vw",
+              }
+            }
+          />
+        </div>
+      </div>
+      <div
+        className="col-3"
+      >
+        <h4
+          style={
+            Object {
+              "color": "#fff",
+            }
+          }
+        >
+          Ireland
+           Charts
+           
+          11/12/2020
+        </h4>
+        <div
+          className="CountryChartTable"
+        >
+          <table
+            className="table table-hover"
+          >
+            <thead>
+              <tr>
+                <th>
+                  Position
+                </th>
+                <th>
+                  Track
+                </th>
+                <th>
+                  Streams
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  !!!
+                </td>
+                <td>
+                  Loading
+                </td>
+                <td>
+                  !!!
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div
+      className="row"
+    />
+  </div>,
+]
+`;
