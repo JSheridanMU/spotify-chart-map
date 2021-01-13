@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<div
+  className="map-container container"
+>
+  <div
+    style={
+      Object {
+        "height": "70vh",
+        "width": "35vw",
+      }
+    }
+  />
+</div>
+`;

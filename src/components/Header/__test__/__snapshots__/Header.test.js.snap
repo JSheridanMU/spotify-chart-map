@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<nav
+  className="color-nav navbar navbar-expand navbar-dark"
+>
+  <a
+    className="navbar-brand"
+    href="#home"
+  >
+    <img
+      alt=""
+      className="d-inline-block align-top"
+      height="30"
+      src="/logo.png"
+      width="30"
+    />
+     
+    Spotify Chart Map
+  </a>
+  <a
+    className="btn btn--loginApp-link ml-auto"
+    href="https://accounts.spotify.com/authorize?client_id=d6aa49c0c90c42a49e4aa1e2b04dfb63&redirect_uri=http://localhost:3000&scope=streaming%20user-read-email%20user-read-private%20user-read-playback-state%20user-library-read%20user-library-modify%20user-read-currently-playing%20user-modify-playback-state&response_type=token&show_dialog=true"
+  >
+    Login to Spotify
+  </a>
+</nav>
+`;
