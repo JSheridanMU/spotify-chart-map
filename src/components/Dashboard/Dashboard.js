@@ -11,11 +11,6 @@ import Header from "../Header/Header";
 import Player from "../Player/Player";
 import { db } from "../../utils/Firebase";
 
-const initialCountry = {
-  name: "Ireland",
-  code: "ie",
-};
-
 const makeArray = (snapshot) => {
   const output = []
 
@@ -31,7 +26,6 @@ const makeArray = (snapshot) => {
 export default function Dashboard() {
   let dateArray = [];
   let minDate = "01/01/2017";
-  //let maxDate = moment().subtract(1, "days").format("DD/MM/YYYY");
   let maxDate = "11/12/2020";
 
   while (
@@ -42,6 +36,7 @@ export default function Dashboard() {
     minDate = moment(minDate, "DD/MM/YYYY").add(1, "days").format("DD/MM/YYYY");
   }
 
+  const initialCountry = { name: "Ireland", code: "ie"};
   const { country, handleInputChange } = GetCountry(initialCountry);
   const { track, handleTrackChange } = GetTrack();
   const [tempDate, setTempDate] = useState(maxDate);
@@ -67,7 +62,7 @@ export default function Dashboard() {
         
         ref.orderByChild("date").equalTo(altDate).on("value", (snapshot) => {
             data = data.concat(makeArray(snapshot))
-            console.log(data)
+
             data.forEach(entry => {
               if(entry.region === region.code)
                 countryTemp.push(entry)
@@ -130,7 +125,7 @@ export default function Dashboard() {
               {country.name} Charts{" "}
               {dateArray[finalDate] ? dateArray[finalDate] : maxDate}
             </h4>
-            <div class = "CountryChartTable">
+            <div className = "CountryChartTable">
               <Table hover>
                 <thead>
                   <tr>

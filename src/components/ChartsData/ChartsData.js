@@ -20,9 +20,9 @@ export default function ChartsData(chart, handleTrackChange, _token) {
         <tr key={entry.position}>
           <td>
             {_token ? (
-              <div class="play-button">
-                <div class="play-button--off">{chart.indexOf(entry) + 1}</div>
-                <div class="play-button--on">
+              <div className="play-button">
+                <div className="play-button--off">{chart.indexOf(entry) + 1}</div>
+                <div className="play-button--on">
                   <ThemeProvider theme={theme}>
                     <IconButton
                       color="primary"
