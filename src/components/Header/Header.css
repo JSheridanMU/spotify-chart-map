@@ -9,7 +9,7 @@
     border: 0.2em solid #1DB954 !important;
     color: #1DB954 !important;
     cursor: pointer;
-    font-size: 3vmin;
+    font-size: 16px !important;
     padding: 0.7em 1.5em;
     text-transform: uppercase;
     transition: all 0.25s ease;
