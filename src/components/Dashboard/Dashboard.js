@@ -26,7 +26,7 @@ const makeArray = (snapshot) => {
 export default function Dashboard() {
   let dateArray = [];
   let minDate = "01/01/2017";
-  let maxDate = "11/12/2020";
+  let maxDate = moment().subtract(3, "days").format("DD/MM/YYYY");
 
   while (
     moment(minDate, "DD/MM/YYYY").valueOf() <=
@@ -50,29 +50,21 @@ export default function Dashboard() {
   }
 
   useEffect(() => {
-    const ref = db.ref();
     const date = dateArray[finalDate] ? dateArray[finalDate] : maxDate;
     const altDate = moment(date, "DD/MM/YYYY").format("YYYY-MM-DD");
+    const year = moment(date, "DD/MM/YYYY").format("YYYY");
     const region = country ? country : initialCountry;
+    const ref = db.ref(year+'/'+altDate);
 
-    ref.orderByChild("date").equalTo(date).on("value", (snapshot) => {
-        let data = makeArray(snapshot)
-        let countryTemp = []
-        let globalTemp = []
-        
-        ref.orderByChild("date").equalTo(altDate).on("value", (snapshot) => {
-            data = data.concat(makeArray(snapshot))
+    ref.orderByChild("region").equalTo(region.code).on("value", (snapshot) => {
+      let data = makeArray(snapshot)
+      setRegional(data)
+    });
 
-            data.forEach(entry => {
-              if(entry.region === region.code)
-                countryTemp.push(entry)
-              if(entry.region === "global")
-                globalTemp.push(entry)
-            })
-            setGlobal(globalTemp)
-            setRegional(countryTemp)
-          });
-      });
+    ref.orderByChild("region").equalTo("global").on("value", (snapshot) => {
+      let data = makeArray(snapshot)
+      setGlobal(data)
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [country, finalDate]);
 
