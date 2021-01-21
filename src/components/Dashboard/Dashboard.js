@@ -135,7 +135,11 @@ export default function Dashboard() {
             </div>
           </Col>
         </Row>
-        <Row>{_token && track && <Player token={_token} track={track} />}</Row>
+        <Row>
+          <div className="player">
+            {_token && track && <Player token={_token} track={track}/>} 
+          </div>
+        </Row>
       </Container>
     </React.Fragment>
   );
